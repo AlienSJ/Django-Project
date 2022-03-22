@@ -5,9 +5,10 @@ from calc.models import teacher
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import *
 
-
 # Create your views here.
 
+
+# Faculty home.
 def teacher_home(request):
     stu = teacher.objects.all().order_by('rno')
     paginator = Paginator(stu, 100)
@@ -22,7 +23,7 @@ def teacher_home(request):
     context = {'stu':stu, 'studs':studs}
     return render(request, 'teacherhome.html', context)
 
-
+# Add new student.
 def add_student(request):
     stu= studentform()
     if request.method=='POST':
@@ -32,7 +33,7 @@ def add_student(request):
         return redirect('teacher')
     return render(request, "add-student.html", {'stu':stu})    
 
-
+# Student home.
 def student_home(request):
     details = teacher.objects.filter(name=request.user)
     # total=teacher.objects.aggregate(Sum('subject1'))

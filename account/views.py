@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 def index(request):
     return render(request, 'index.html')
 
-
+# Registration view.
 def register(request):
     msg = None
     if request.method == 'POST':
@@ -22,7 +22,7 @@ def register(request):
         form = SignUpForm()
     return render(request,'register.html', {'form': form, 'msg': msg})
 
-
+# Login view.
 def login_view(request):
     form = LoginForm(request.POST or None)
     msg = None
@@ -43,12 +43,12 @@ def login_view(request):
             msg = 'error validating form'
     return render(request, 'login.html', {'form': form, 'msg': msg})
 
-
+# Logout view.
 def logout_view(request):
     logout(request)
     return redirect('index')
 
-
+# Home page.
 def home(request):
     return render(request,'home.html')
 
